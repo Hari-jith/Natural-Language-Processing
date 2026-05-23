@@ -1,10 +1,10 @@
-# Emotion Classification using LSTM in PyTorch
+# Emotion Classification using LSTM and BiLSTM in PyTorch
 
 ## Overview
 
-This project implements a deep learning based **Text Emotion Classification System** using **PyTorch** and **LSTM (Long Short-Term Memory)** networks.
+This project implements a deep learning based **Text Emotion Classification System** using **PyTorch**, **LSTM (Long Short-Term Memory)**, and **Bidirectional LSTM (BiLSTM)** networks.
 
-The model is trained on the **DAIR-AI Emotion Dataset** and classifies text into six different emotion categories:
+The models are trained on the **DAIR-AI Emotion Dataset** and classify text into six different emotion categories:
 
 - Sadness
 - Joy
@@ -24,7 +24,9 @@ The project covers:
 - Custom PyTorch Dataset and DataLoader
 - Embedding layers
 - LSTM architecture
+- BiLSTM architecture
 - Model training and evaluation
+- Comparative model analysis
 - Emotion inference on custom text
 
 ---
@@ -37,6 +39,8 @@ The project covers:
 - Sequence padding and truncation
 - PyTorch Dataset and DataLoader implementation
 - LSTM based text classification model
+- BiLSTM based text classification model
+- Comparative performance evaluation
 - Training and validation pipeline
 - Accuracy and loss visualization
 - Confusion matrix visualization
@@ -63,9 +67,11 @@ The project covers:
 # Dataset
 
 Dataset used:
+
 ## DAIR-AI Emotion Dataset
 
 Dataset Link:
+
 https://huggingface.co/datasets/dair-ai/emotion
 
 The dataset contains:
@@ -109,7 +115,7 @@ PyTorch Dataset & DataLoader
    ↓
 Embedding Layer
    ↓
-LSTM Network
+LSTM / BiLSTM Network
    ↓
 Fully Connected Layer
    ↓
@@ -118,13 +124,13 @@ Emotion Prediction
 
 ---
 
-# Model Architecture
+# Model Architectures
 
-The model architecture consists of:
+The project implements two deep learning architectures:
 
-1. Embedding Layer
-2. LSTM Layer
-3. Fully Connected Classification Layer
+## 1. LSTM Model
+
+A standard Long Short-Term Memory network that processes text sequences from left to right.
 
 ### Architecture Flow
 
@@ -136,6 +142,34 @@ Embedding Layer
 LSTM Network
     ↓
 Hidden Representation
+    ↓
+Fully Connected Layer
+    ↓
+Emotion Prediction
+```
+
+---
+
+## 2. Bidirectional LSTM (BiLSTM)
+
+A Bidirectional LSTM processes text sequences in both directions:
+- Left → Right
+- Right → Left
+
+This improves contextual understanding and sequence learning.
+
+### BiLSTM Architecture Flow
+
+```text
+Input Text
+    ↓
+Embedding Layer
+    ↓
+Forward LSTM
+    ↓
+Backward LSTM
+    ↓
+Concatenated Hidden States
     ↓
 Fully Connected Layer
     ↓
@@ -175,13 +209,29 @@ The following preprocessing techniques were implemented manually:
 
 # Model Performance
 
-## Final Results
+## Final Model Comparison
 
-| Metric | Score |
-|---|---|
-| Training Accuracy | 98.94% |
-| Validation Accuracy | 86.70% |
-| Test Accuracy | 85.90% |
+| Model | Test Accuracy | Test Loss |
+|---|---|---|
+| LSTM | 85.90% | 0.6047 |
+| BiLSTM | 86.65% | 0.5403 |
+
+The BiLSTM model achieved better contextual understanding and improved overall classification performance compared to the standard LSTM model.
+
+---
+
+# BiLSTM Classification Report
+
+| Emotion | Precision | Recall | F1-Score |
+|---|---|---|---|
+| sadness | 0.91 | 0.92 | 0.91 |
+| joy | 0.89 | 0.88 | 0.89 |
+| love | 0.73 | 0.73 | 0.73 |
+| anger | 0.85 | 0.85 | 0.85 |
+| fear | 0.85 | 0.85 | 0.85 |
+| surprise | 0.67 | 0.73 | 0.70 |
+
+Overall Accuracy: **86.65%**
 
 ---
 
@@ -200,22 +250,14 @@ These visualizations help analyze:
 
 # Confusion Matrix
 
-A confusion matrix is generated to visualize:
+Confusion matrices are generated for both:
+- LSTM
+- BiLSTM
+
+These visualizations help analyze:
 - Correct predictions
 - Misclassified emotions
 - Emotion-wise model performance
-
----
-
-# Classification Report
-
-The project includes a detailed classification report containing:
-- Precision
-- Recall
-- F1-score
-- Support
-
-for each emotion category.
 
 ---
 
@@ -234,7 +276,15 @@ for each emotion category.
 ## Clone Repository
 
 ```bash
-git clone (https://github.com/Hari-jith/Natural-Language-Processing/Emotion-Classification-LSTM)
+git clone https://github.com/Hari-jith/Natural-Language-Processing.git
+```
+
+---
+
+## Navigate to Project Folder
+
+```bash
+cd Natural-Language-Processing
 ```
 
 ---
@@ -258,7 +308,7 @@ jupyter notebook
 Open:
 
 ```text
-text_emotion_detection.ipynb
+Text_Emotion_Detection_Comparative_Model.ipynb
 ```
 
 Run all notebook cells sequentially.
@@ -269,8 +319,6 @@ Run all notebook cells sequentially.
 
 Possible future enhancements:
 
-- Bidirectional LSTM (BiLSTM)
-- Dropout Regularization
 - Attention Mechanism
 - GloVe Word Embeddings
 - GRU Architecture
@@ -278,6 +326,7 @@ Possible future enhancements:
 - Streamlit Web App Deployment
 - Transformer-based Comparison
 - Real-time Emotion Detection API
+- BERT-based Emotion Classification
 
 ---
 
@@ -291,21 +340,22 @@ This project demonstrates understanding of:
 - PyTorch workflow
 - Recurrent neural networks
 - LSTM architecture
-- Model training and evaluation
+- Bidirectional LSTM architecture
+- Model comparison and evaluation
 - NLP preprocessing pipeline design
 
 ---
 
 # Conclusion
 
-This project successfully demonstrates how deep learning and NLP techniques can be combined to build an effective emotion classification system using PyTorch and LSTM networks without relying on transformer architectures.
+This project successfully demonstrates how deep learning and NLP techniques can be combined to build effective emotion classification systems using PyTorch and recurrent neural networks.
 
-The model achieved strong classification performance while maintaining a fully explainable and educational NLP pipeline.
+Both LSTM and BiLSTM architectures were implemented and evaluated on the DAIR-AI Emotion Dataset. The BiLSTM model achieved improved performance by learning contextual information from both forward and backward directions in text sequences.
+
+The project achieved strong classification performance while maintaining a fully explainable and educational NLP pipeline without relying on transformer-based architectures.
 
 ---
 
 # Author
 
 ## Harijith M M
-
----
