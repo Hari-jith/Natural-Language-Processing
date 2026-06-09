@@ -1,242 +1,213 @@
-# 📰 Fake News Detection using Deep Learning
+# Fake News Detection using DistilBERT
 
-## 📌 Overview
+## Overview
 
-This project focuses on detecting fake news articles using Natural Language Processing (NLP) and Deep Learning techniques. The system is designed to classify news content as either real or fake based on textual information extracted from news articles.
+This project implements a **Fake News Detection System** using the **DistilBERT transformer model** and transfer learning techniques. The model is fine-tuned on the Fake.csv and True.csv datasets to classify news articles as either **Fake** or **Real**.
 
-The project demonstrates an end-to-end NLP workflow that includes data preprocessing, text cleaning, tokenization, feature preparation, deep learning model training, and binary classification using TensorFlow/Keras.
+Unlike traditional machine learning and recurrent neural network approaches, transformer-based models capture contextual relationships within text more effectively, resulting in significantly improved performance.
 
-By working with real-world news datasets, the project highlights practical applications of artificial intelligence in misinformation detection and automated content verification systems.
-
----
-
-# 🎯 Objective
-
-The primary objective of this project is to build a deep learning-based fake news classification system capable of identifying misleading or fabricated news articles from textual data.
-
-The project aims to:
-
-- Perform comprehensive NLP preprocessing on raw news text
-- Convert textual data into machine-readable numerical representations
-- Train a deep learning model for binary text classification
-- Evaluate the effectiveness of the model on unseen data
-- Save the trained model for future inference and deployment
+The project was developed using **PyTorch** and the **Hugging Face Transformers** library and includes extensive evaluation using multiple classification metrics and visualization techniques.
 
 ---
 
-# 🧠 Technologies Used
+## Features
 
-- Python
-- TensorFlow
-- Keras
-- Pandas
-- NumPy
-- NLTK
-- BeautifulSoup
-- Scikit-learn
-
----
-
-# 📂 Dataset Information
-
-The project uses two publicly available datasets containing real and fake news articles.
-
-### Dataset Files
-
-- **True.csv** — Contains genuine news articles
-- **Fake.csv** — Contains fabricated or misleading news articles
-
-### Dataset Features
-
-Each dataset contains:
-
-- News title
-- Subject/category
-- News article text
-- Publication date
-
-The datasets are merged into a single dataframe and labeled for binary classification:
-
-- **1 → Real News**
-- **0 → Fake News**
+* Transformer-based text classification using DistilBERT
+* Transfer learning with pre-trained language models
+* Binary classification of fake and real news articles
+* Prevention of data leakage and duplicate samples
+* Dynamic tokenization and padding
+* Performance evaluation using multiple metrics
+* Confusion matrix visualization
+* ROC-AUC analysis
+* Model saving and inference support
 
 ---
 
-# ⚙️ Project Workflow
+## Dataset
 
-## 1️⃣ Data Collection and Loading
+The project uses two publicly available datasets:
 
-The fake and real news datasets are loaded using Pandas and combined into a single dataset for further processing.
+* **True.csv** – Contains authentic news articles.
+* **Fake.csv** – Contains fabricated news articles.
 
-The project handles dataset merging and target labeling to prepare the data for supervised learning.
+### Dataset Composition
 
----
+| Class | Description |
+| ----- | ----------- |
+| 0     | Fake News   |
+| 1     | Real News   |
 
-## 2️⃣ Text Preprocessing
+### Preprocessing
 
-A complete NLP preprocessing pipeline is implemented to clean and normalize the textual data before model training.
+To ensure reliable evaluation:
 
-### Preprocessing Steps Include
-
-### ✔ HTML Tag Removal
-
-News content often contains HTML tags and unwanted formatting. BeautifulSoup is used to remove unnecessary HTML components.
-
-### ✔ Lowercase Conversion
-
-All text is converted into lowercase format to maintain consistency across the dataset.
-
-### ✔ Tokenization
-
-Sentences are split into individual tokens or words for easier text processing.
-
-### ✔ Stopword Removal
-
-Common words such as “the”, “is”, and “and” are removed to reduce noise in the dataset.
-
-### ✔ Lemmatization
-
-Words are converted into their root forms to improve semantic consistency.
-
-### ✔ Punctuation and Special Character Removal
-
-Unnecessary punctuation marks and symbols are removed from the text.
+* Combined title and article text.
+* Removed the subject column to avoid information leakage.
+* Removed duplicate samples.
+* Ensured no overlap between training and testing data.
+* Used DistilBERT tokenizer for text encoding.
+* Applied truncation and dynamic padding.
 
 ---
 
-## 3️⃣ Feature Engineering
+## Project Structure
 
-Important text-based columns such as subject, title, and article content are combined to create a richer textual representation for model learning.
-
-This improves the contextual understanding of the news articles during classification.
-
----
-
-## 4️⃣ Train-Test Splitting
-
-The dataset is divided into training and testing sets to evaluate the model’s generalization capability on unseen data.
-
-This ensures that the model performance is measured fairly and avoids overfitting on training data.
-
----
-
-## 5️⃣ Text Tokenization and Sequence Preparation
-
-The cleaned textual data is transformed into numerical sequences using TensorFlow/Keras tokenization utilities.
-
-Padding is applied to ensure all sequences maintain a fixed length suitable for deep learning model input.
-
----
-
-# 🤖 Deep Learning Model
-
-The project uses a Sequential Neural Network architecture implemented using TensorFlow/Keras.
-
-The model is designed for binary classification and includes multiple dense layers with nonlinear activation functions.
-
-### Model Characteristics
-
-- Deep learning-based binary classifier
-- Dense neural network architecture
-- ReLU activation for hidden layers
-- Sigmoid activation for output layer
-- Adam optimizer
-- Binary cross-entropy loss function
-
-The sigmoid output layer predicts whether a news article is real or fake.
+```text
+Fake-News-Detection-DistilBERT/
+│
+├── dataset/
+│   ├── Fake.csv
+│   └── True.csv
+│
+├── notebooks/
+│   └── Fake_News_Detection_DistilBERT.ipynb
+│
+├── models/
+│   └── distilbert_model/
+│
+├── outputs/
+│   ├── confusion_matrix.png
+│   ├── roc_curve.png
+│   └── results.csv
+│
+├── requirements.txt
+├── README.md
+```
 
 ---
 
-# 📊 Model Training
+## Technologies Used
 
-The model is trained on the processed news dataset over multiple epochs to learn textual patterns associated with fake and real news content.
-
-During training, the neural network adjusts its weights to minimize classification error and improve prediction accuracy.
-
----
-
-# 📈 Evaluation
-
-The trained model is evaluated using testing data to measure its classification performance on unseen news articles.
-
-The evaluation process helps determine the effectiveness of the model in detecting misinformation.
-
-Performance is measured using:
-
-- Accuracy
-- Loss metrics
-- Binary classification evaluation
+* Python
+* PyTorch
+* Hugging Face Transformers
+* DistilBERT
+* Datasets
+* NumPy
+* Pandas
+* Scikit-learn
+* Matplotlib
+* Seaborn
 
 ---
 
-# 💾 Model Saving
+## Model Architecture
 
-After successful training, the model is saved in Keras format for future inference and deployment purposes.
+### DistilBERT
 
-This allows the trained classifier to be reused without retraining the model from scratch.
+DistilBERT is a lightweight and efficient version of BERT that retains most of BERT's language understanding capabilities while reducing computational requirements.
 
----
+Model used:
 
-# 🚀 Key Features
+```python
+distilbert-base-uncased
+```
 
-- Real-world fake news classification
-- Complete NLP preprocessing pipeline
-- Deep learning-based binary classification
-- TensorFlow/Keras implementation
-- Sequence tokenization and padding
-- Model saving for future inference
-- End-to-end machine learning workflow
+### Training Configuration
 
----
-
-# 📚 Learning Outcomes
-
-This project helped strengthen practical understanding of:
-
-- Natural Language Processing
-- Text preprocessing techniques
-- Deep learning fundamentals
-- Binary text classification
-- TensorFlow/Keras workflows
-- Dataset cleaning and preparation
-- Model training and evaluation
+| Parameter               |   Value |
+| ----------------------- | ------: |
+| Learning Rate           |    2e-5 |
+| Epochs                  |       3 |
+| Batch Size              |      16 |
+| Maximum Sequence Length |     256 |
+| Weight Decay            |    0.01 |
+| Optimizer               |   AdamW |
+| Framework               | PyTorch |
 
 ---
 
-# 🔮 Future Improvements
+## Performance Metrics
 
-Several enhancements can further improve the project performance and scalability.
+### Evaluation Results
 
-### Possible Improvements
-
-- Implement LSTM or BiLSTM architectures
-- Use Transformer-based models such as BERT
-- Add attention mechanisms
-- Perform hyperparameter tuning
-- Introduce TF-IDF or Word Embeddings
-- Build a Streamlit or Flask web application
-- Deploy the model using FastAPI or Docker
-- Add confusion matrix and F1-score evaluation
-- Integrate explainable AI tools such as SHAP or LIME
+| Metric        |  Score |
+| ------------- | -----: |
+| Accuracy      | 99.91% |
+| Precision     | 99.98% |
+| Recall        | 99.86% |
+| F1 Score      | 99.92% |
+| ROC-AUC Score | 99.92% |
 
 ---
 
-# 🏆 Conclusion
+## Classification Report
 
-This project presents a practical implementation of fake news detection using deep learning and NLP techniques. It demonstrates the complete workflow of preparing textual data, building a neural network classifier, and evaluating its ability to distinguish between real and fake news articles.
+```text
+              precision    recall  f1-score   support
 
-The project is suitable for showcasing:
+Fake News        1.00       1.00      1.00      3582
+Real News        1.00       1.00      1.00      4239
 
-- NLP skills
-- Deep learning fundamentals
-- TensorFlow/Keras expertise
-- Real-world machine learning applications
-- End-to-end AI project development
-
-It serves as a strong beginner-to-intermediate level portfolio project for Data Science, Machine Learning, and Artificial Intelligence roles.
+accuracy                              1.00      7821
+macro avg         1.00       1.00      1.00      7821
+weighted avg      1.00       1.00      1.00      7821
+```
 
 ---
 
-# 👨‍💻 Author
+## Confusion Matrix
+
+| Actual Class | Predicted Fake | Predicted Real |
+| ------------ | -------------: | -------------: |
+| Fake News    |           3581 |              1 |
+| Real News    |              6 |           4233 |
+
+Only **7 misclassifications** were observed out of **7,821 test samples**.
+
+---
+
+## Training Results
+
+| Epoch | Training Loss | Validation Loss | Accuracy | Precision | Recall | F1 Score |
+| ----- | ------------: | --------------: | -------: | --------: | -----: | -------: |
+| 1     |        0.0252 |          0.0093 |   99.78% |    99.65% | 99.95% |   99.80% |
+| 2     |        0.0029 |          0.0077 |   99.91% |    99.98% | 99.86% |   99.92% |
+| 3     |        0.0000 |          0.0092 |   99.87% |    99.86% | 99.91% |   99.88% |
+
+---
+
+## Model Training Pipeline
+
+1. Load Fake.csv and True.csv datasets.
+2. Merge and label the classes.
+3. Remove duplicate records.
+4. Split into training and testing sets.
+5. Tokenize text using DistilBERT tokenizer.
+6. Fine-tune DistilBERT for binary classification.
+7. Evaluate using classification metrics.
+8. Generate confusion matrix and ROC-AUC score.
+9. Save the trained model for future inference.
+
+---
+
+## Saving the Model
+
+```python
+model.save_pretrained("distilbert_model")
+tokenizer.save_pretrained("distilbert_model")
+```
+
+---
+
+## Future Improvements
+
+* Compare DistilBERT with RoBERTa and DeBERTa.
+* Hyperparameter tuning.
+* Deploy the model using Streamlit or Flask.
+* Build a real-time fake news detection web application.
+* Support multilingual news classification.
+* Integrate explainable AI techniques for prediction interpretation.
+
+---
+
+## Conclusion
+
+This project demonstrates the effectiveness of transformer-based transfer learning for fake news classification. By leveraging DistilBERT and carefully preventing data leakage, the model achieved excellent performance with an accuracy of **99.91%** and an F1-score of **99.92%**, significantly outperforming traditional neural network approaches.
+
+---
+
+## Author
 
 **Harijith M M**
