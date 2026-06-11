@@ -54,19 +54,16 @@ To ensure reliable evaluation:
 ## Project Structure
 
 ```text
-Fake-News-Detection-DistilBERT/
+Fake-News-Detection/
 │
-├── dataset/
+├── Dataset/
 │   ├── Fake.csv
 │   └── True.csv
 │
-├── notebooks/
-│   └── Fake_News_Detection_DistilBERT.ipynb
+├── Notebooks/
+│   └── Fake_News_Detection.ipynb
 │
-├── models/
-│   └── distilbert_model/
-│
-├── outputs/
+├── Outputs/
 │   ├── confusion_matrix.png
 │   ├── roc_curve.png
 │   └── results.csv
